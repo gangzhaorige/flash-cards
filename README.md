@@ -21,3 +21,6 @@ Refactor | A code change that MUST be just a refactoring.
 Reformat | Refactor of formatting, e.g. omit whitespace.
 Optimize | Refactor of performance, e.g. speed up code.
 Document | Refactor of documentation, e.g. help files.
+
+# Developers
+1. Gangzhaorige Li
