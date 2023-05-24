@@ -1,13 +1,22 @@
 # Flash-cards
 Improve your skills with flash cards!
 
-# Requirements
-1. Server: Java OpenJDK17 && Maven 3.5
-2. Client: Flutter SDK 3.10.1 Dart 3.0.1
+# Requirements (Make sure to add it to your path)
+1. Server: Install Java OpenJDK17 & Maven 3.5+. 
+2. Client: Instal Flutter SDK 3.10.1 & Dart 3.0.1 (Latest Version).
+3. Add Flutter, Maven, and Java pathing to your system. (If not done yet).
 
-# Running project using Makefile
+# Running project (Mac Users)
 1. Go to the main project.
-2. make run-dev
+2. Use the command 'make run-dev' in terminal to run both front-end and back-end.
+
+# Running project (Windows Users)
+1. Windows user needs to have two cmds open.
+2. First cmd, cd into server folder and run './mvnw spring-boot:run'.
+3. Second cmd, cd into client folder and run 'flutter run -d chrome'.
+
+# IDE
+Use your favorite IDE as long as it supports Flutter.
 
 ## Subject Line Standard Terminology
 
