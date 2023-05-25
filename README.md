@@ -15,6 +15,17 @@ Improve your skills with flash cards!
 2. First cmd, cd into server folder and run './mvnw spring-boot:run'.
 3. Second cmd, cd into client folder and run 'flutter run -d chrome'.
 
+# Setup MySQL
+1. Install mysql.
+2. Open terminal / cmd.
+3. Run 'mysql_secure_installation'.
+4. Run 'service mysql start' or 'brew services mysql start'(if installed mysql using homebrew).
+5. Run 'mysql -u root' to connect to the mysql.
+6. Run "create database flash_cards_db;" in mysql.
+7. Run "create user 'admin'@'%' identified by 'admin';".
+8. Run "grant all on flash_cards_db.* to 'admin'@'%';".
+
+
 # IDE
 Use your favorite IDE as long as it supports Flutter.
 
