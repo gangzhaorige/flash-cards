@@ -33,3 +33,5 @@ Document | Refactor of documentation, e.g. help files.
 
 # Developers
 1. Gangzhaorige Li
+2. Ziming Wang
+3. Tao Jin
