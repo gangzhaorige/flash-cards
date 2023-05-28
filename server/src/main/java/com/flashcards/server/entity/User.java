@@ -36,7 +36,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 60)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -48,6 +48,10 @@ public class User {
 
     @JsonFormat(pattern="yyyy-MM-dd")
     Date dateUpdated;
+
+    protected User() {
+        
+    }
 
     public User(String email, String username, String password) {
         this.email = email;
