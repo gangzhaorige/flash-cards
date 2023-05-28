@@ -14,18 +14,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.UniqueConstraint;
+
 @Entity
+@Table(
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+    }
+)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 255)
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String username;
 
     @Column(nullable = false, length = 255)
     private String password;
@@ -34,19 +43,16 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @Column(nullable = false, unique = true)
-    private String username;
-
     @JsonFormat(pattern="yyyy-MM-dd")
     Date dateCreated;
 
     @JsonFormat(pattern="yyyy-MM-dd")
     Date dateUpdated;
 
-    public User(String email, String name, String password) {
+    public User(String email, String username, String password) {
         this.email = email;
         this.password = password;
-        this.name = name;
+        this.username = username;
     }
 
     public Long getId() {
@@ -65,12 +71,12 @@ public class User {
         this.email = email;
     }
 
-    public String getName() {
-        return this.name;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
