@@ -1,4 +1,4 @@
-package io.mazaalai.server.payload.responses;
+package com.flashcards.server.payload.responses;
 
 public class MessageResponse {
     private String message;
@@ -8,7 +8,7 @@ public class MessageResponse {
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
     public void setMessage(String message) {
