@@ -22,6 +22,7 @@ import com.flashcards.server.security.services.UserDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
 	@Autowired
     UserDetailsServiceImpl userDetailsService;
 
@@ -69,6 +70,5 @@ public class SecurityConfig {
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
-    }
-    
+    }   
 }

@@ -57,26 +57,22 @@ public class AuthController {
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 		Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                loginRequest.getUsername(),
-                loginRequest.getPassword()
-            )
-        );
+				new UsernamePasswordAuthenticationToken(
+						loginRequest.getUsername(),
+						loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 		List<String> roles = userDetails.getAuthorities().stream()
-            .map(item -> item.getAuthority())
-            .collect(Collectors.toList());
+				.map(item -> item.getAuthority())
+				.collect(Collectors.toList());
 
 		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(
-            new UserInfoResponse(
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles
-            )
-        );
+				new UserInfoResponse(
+						userDetails.getId(),
+						userDetails.getUsername(),
+						userDetails.getEmail(),
+						roles));
 	}
 
 	@PostMapping("/signup")
@@ -85,11 +81,10 @@ public class AuthController {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
 		}
 		User user = new User(
-            signUpRequest.getEmail(), 
-            signUpRequest.getUsername(), 
-            encoder.encode(signUpRequest.getPassword())
-        );
-        
+				signUpRequest.getEmail(),
+				signUpRequest.getUsername(),
+				encoder.encode(signUpRequest.getPassword()));
+
 		Set<String> strRoles = null;
 
 		Set<Role> roles = new HashSet<>();
@@ -108,9 +103,7 @@ public class AuthController {
 	public ResponseEntity<?> logoutUser() {
 		ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
 		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(
-            new MessageResponse(
-                "You've been signed out!"
-            )
-        );
+				new MessageResponse(
+						"You've been signed out!"));
 	}
 }

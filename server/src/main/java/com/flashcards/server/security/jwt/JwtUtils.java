@@ -2,7 +2,6 @@ package com.flashcards.server.security.jwt;
 
 import java.util.Date;
 
-
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 
