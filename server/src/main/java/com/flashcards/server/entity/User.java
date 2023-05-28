@@ -103,4 +103,12 @@ public class User {
         this.dateUpdated = dateUpdated;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 }
