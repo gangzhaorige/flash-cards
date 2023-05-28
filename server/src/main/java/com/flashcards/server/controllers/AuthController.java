@@ -62,13 +62,9 @@ public class AuthController {
                 loginRequest.getPassword()
             )
         );
-
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
 		ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
-
 		List<String> roles = userDetails.getAuthorities().stream()
             .map(item -> item.getAuthority())
             .collect(Collectors.toList());
@@ -88,32 +84,20 @@ public class AuthController {
 		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
 		}
-		User user = new User(signUpRequest.getEmail(), signUpRequest.getEmail(), signUpRequest.getEmail());
+		User user = new User(
+            signUpRequest.getEmail(), 
+            signUpRequest.getUsername(), 
+            encoder.encode(signUpRequest.getPassword())
+        );
+        
+		Set<String> strRoles = null;
 
-		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
 
 		if (strRoles == null) {
 			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(userRole);
-		} else {
-			strRoles.forEach(role -> {
-				switch (role) {
-					case "admin":
-						Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(
-                            () -> new RuntimeException("Error: Role is not found.")
-                        );
-						roles.add(adminRole);
-						break;
-					default:
-						Role userRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(
-                            () -> new RuntimeException("Error: Role is not found.")
-                        );
-						roles.add(userRole);
-                        break;
-				}
-			});
 		}
 		user.setRoles(roles);
 		userRepository.save(user);
