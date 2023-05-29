@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("/all")
-	public String allAccess() {
-		return "Public Content.";
-	}
+    public String allAccess() {
+        return "Public Content.";
+    }
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/user")
@@ -26,5 +26,4 @@ public class TestController {
     public ResponseEntity<?> adminAccess() {
         return ResponseEntity.ok().body("Only admin can access");
     }
-    
 }

@@ -19,17 +19,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(
-    uniqueConstraints = {
+@Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")
-    }
-)
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(nullable = false, length = 255, unique = true)
     private String email;
 
@@ -43,14 +41,14 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     Date dateCreated;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     Date dateUpdated;
 
     protected User() {
-        
+
     }
 
     public User(String email, String username, String password) {
@@ -114,5 +112,4 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
 }

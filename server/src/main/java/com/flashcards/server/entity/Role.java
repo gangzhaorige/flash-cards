@@ -1,6 +1,5 @@
 package com.flashcards.server.entity;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.GeneratedValue;

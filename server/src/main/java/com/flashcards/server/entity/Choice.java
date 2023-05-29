@@ -17,7 +17,7 @@ public class Choice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
+
     @Column(nullable = false, length = 255)
     private String answerText;
 
