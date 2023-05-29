@@ -36,10 +36,10 @@ public class Card {
     @Column(nullable = false, length = 255)
     private String answer;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     Date dateCreated;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     Date dateUpdated;
 
     public Card(String question, boolean isMultipleChoice, String answer) {
