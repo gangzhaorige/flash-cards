@@ -1,3 +1,4 @@
+import 'package:client/test.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,7 +32,9 @@ class FlashCards extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(),
+      home: Scaffold(
+        body: TestWidget(),
+      ),
     );
   }
 }
