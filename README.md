@@ -24,6 +24,11 @@ Improve your skills with flash cards!
 6. Run "create user 'admin'@'%' identified by 'admin';".
 7. Run "grant all on flash_cards_db.* to 'admin'@'%';".
 
+# MySQL Migration (If the structure of db is changed)
+1. Connect to the mysql as root.
+2. Drop the database flash_cards_db.
+3. Create the database flash_cards_db.
+4. Run your server again.
 
 # IDE
 Use your favorite IDE as long as it supports Flutter.
