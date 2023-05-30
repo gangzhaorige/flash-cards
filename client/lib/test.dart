@@ -20,11 +20,21 @@ class TestWidget extends StatelessWidget {
     print(response.body);
   }
 
+  Future<void> signup() async {
+    var headers = {
+      'Content-Type':'application/json',
+    };
+    var body = jsonEncode({'username' : 'tony2', 'password' : 'tony', 'email' : 'tony2@tony.com'});
+    var response = await client.post(
+      Uri.parse('http://localhost:8080/api/auth/signup'),
+      headers: headers,
+      body: body);
+    print(response.body);
+  }
+
   Future<void> logout() async {
     var headers = {
       'Content-Type':'application/json',
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH',
-      'Access-Control-Allow-Credentials' : 'true',
     };
     var response = await client.post(
       Uri.parse('http://localhost:8080/api/auth/signout'),
@@ -83,11 +93,15 @@ class TestWidget extends StatelessWidget {
               child: const Text('Login'),
             ),
             MaterialButton(
+              onPressed: signup,
+              color: Colors.blue,
+              child: const Text('Signup'),
+            ),
+            MaterialButton(
               onPressed: logout,
               color: Colors.blue,
               child: const Text('Logout'),
             ),
-            
           ]
         ),
       ),
