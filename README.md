@@ -28,6 +28,9 @@ Improve your skills with flash cards!
 1. Connect to the mysql as root.
 2. Drop the database flash_cards_db.
 3. Create the database flash_cards_db.
+4. Use flash_cards_db.
+5. Start your server to create tables.
+5. INSERT INTO role(name) VALUES('ROLE_USER');
 4. Run your server again.
 
 # IDE
