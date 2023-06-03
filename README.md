@@ -13,7 +13,7 @@ Improve your skills with flash cards!
 # Running project (Windows Users)
 1. Windows user needs to have two cmds open.
 2. First cmd, cd into server folder and run './mvnw spring-boot:run'.
-3. Second cmd, cd into client folder and run 'flutter run -d chrome'.
+3. Second cmd, cd into client folder and run 'flutter run -d chrome --web-port 54735'.
 
 # Setup MySQL
 1. Install mysql.
