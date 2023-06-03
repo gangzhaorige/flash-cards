@@ -42,6 +42,10 @@ public class Card {
     @JsonFormat(pattern = "yyyy-MM-dd")
     Date dateUpdated;
 
+    protected Card() {
+
+    }
+
     public Card(String question, boolean isMultipleChoice, String answer) {
         this.question = question;
         this.isMultipleChoice = isMultipleChoice;
