@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'models/login_model.dart';
+import 'models/signup_model.dart';
 import 'routes/navigation.dart';
 
 void main() async {
@@ -12,6 +13,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LoginModel()),
+        ChangeNotifierProvider(create: (_) => RegisterModel()),
       ],
       child: const FlashCards(),
     ),
