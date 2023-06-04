@@ -98,6 +98,7 @@ public class AuthController {
         List<String> errors = new ArrayList<>();
         String email = signUpRequest.getEmail();
         String username = signUpRequest.getUsername();
+        String password = signUpRequest.getPassword();
         if (!email.matches(EMAIL_PATTERN)) {
             errors.add("Please check your email and try again.");
         }
@@ -110,17 +111,14 @@ public class AuthController {
         if (!username.matches(USERNAME_PATTERN)) {
             errors.add("Username must start with character. Allowed alphanumerical characters and underscore.");
         }
-        if (!signUpRequest.getPassword().matches(PASSWORD_PATTERN)) {
+        if (!password.matches(PASSWORD_PATTERN)) {
             errors.add("Password is too weak! At least 8 characters with 1 letter and 1 number.");
         }
         if(!errors.isEmpty()) {
             json.put("errors", errors);
             return ResponseEntity.badRequest().body(json);
         }
-        User user = new User(
-                signUpRequest.getEmail(),
-                signUpRequest.getUsername(),
-                encoder.encode(signUpRequest.getPassword()));
+        User user = new User(email, username, encoder.encode(password));
 
         Set<String> strRoles = null;
 
