@@ -1,7 +1,10 @@
 package com.flashcards.server.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    
+    /* 
+        regex for password_pattern
+        atleast 8 character long with 1 letter or number
+    */
+    final static String PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+
+    // regex for a valid email pattern.
+    final static String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    
+    /* 
+        regest for username pattern
+        starts with a character, Alphanumerical, Uppercase, Lowercase character and Underscore are allowed.
+    */
+    final static String USERNAME_PATTERN = "^[A-Za-z]\\w{5,29}$";
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -76,11 +94,28 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        Map<String, Object> json = new HashMap<>();
+        List<String> errors = new ArrayList<>();
+        String email = signUpRequest.getEmail();
+        String username = signUpRequest.getUsername();
+        if (!email.matches(EMAIL_PATTERN)) {
+            errors.add("Please check your email and try again.");
         }
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already in use!"));
+        if (userRepository.existsByEmail(email)) {
+            errors.add("Email is already in use! Please login or use a different email!");
+        }
+        if (userRepository.existsByUsername(username)) {
+            errors.add("Username is already in use!");
+        }
+        if (!username.matches(USERNAME_PATTERN)) {
+            errors.add("Username must start with character. Allowed alphanumerical characters and underscore.");
+        }
+        if (!signUpRequest.getPassword().matches(PASSWORD_PATTERN)) {
+            errors.add("Password is too weak! At least 8 characters with 1 letter and 1 number.");
+        }
+        if(!errors.isEmpty()) {
+            json.put("errors", errors);
+            return ResponseEntity.badRequest().body(json);
         }
         User user = new User(
                 signUpRequest.getEmail(),
