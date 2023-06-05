@@ -32,12 +32,15 @@ class LoginModel extends ChangeNotifier {
       path: '/auth/signin',
       data: jsonEncode({'username' : _username, 'password' : _password}),
     );
-    print(response.data);
     Map<dynamic, dynamic> data = response.data;
     User user = User(username: data['username'] as String, email: data['email'] as String, id: data['id'] as int);
     final authService = Get.find<AuthService>();
     await authService.setUser(user).then((value) {
       Get.toNamed('/protected');
     });
+  }
+
+  Future<void> goToSignup() async {
+    await Get.toNamed('/register');
   }
 }

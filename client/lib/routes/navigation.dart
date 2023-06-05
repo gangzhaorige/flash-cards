@@ -1,6 +1,6 @@
 import 'package:client/views/home_view.dart';
 import 'package:client/routes/middleware/protected_route.dart';
-import 'package:client/views/login_view.dart';
+import 'package:client/views/login/login_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
 import '../views/register_view.dart';
