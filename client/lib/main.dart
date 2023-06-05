@@ -30,11 +30,11 @@ class FlashCards extends StatelessWidget {
       title: 'FlashCards',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       defaultTransition: Transition.noTransition, //this would be the solution
       transitionDuration: const Duration(seconds: 0),
-      initialRoute: Routes.home,
+      initialRoute: Routes.login,
       getPages: appPages,
     );
   }

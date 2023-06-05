@@ -12,3 +12,12 @@ class ProtectedGuard extends GetMiddleware {
     return authService.user != null ? null : const RouteSettings(name: Routes.login);
   }
 }
+
+class LoggedInGuard extends GetMiddleware {
+  final authService = Get.find<AuthService>();
+
+  @override
+  RouteSettings? redirect(String? route) {
+    return authService.user == null ? null : const RouteSettings(name: Routes.protected);
+  }
+}
