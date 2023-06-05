@@ -78,6 +78,8 @@ class _LoginFormState extends State<LoginForm> {
                   return TextField(
                     onChanged: (value) => updateUsername(value),
                     controller: _usernameController,
+                    enableSuggestions: false,
+                    autocorrect: false,
                     decoration: const InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       focusedBorder:OutlineInputBorder(
@@ -109,6 +111,9 @@ class _LoginFormState extends State<LoginForm> {
                 builder: (_, updatePassword, __) {
                   return TextField(
                     onChanged: (value) => updatePassword(value),
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
                     controller: _passwordController,
                     decoration: const InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.never,
