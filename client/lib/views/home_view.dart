@@ -1,4 +1,6 @@
+import 'package:client/models/protected_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -16,6 +18,18 @@ class ProtectedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return Container(child: const Text('protected'),);
+    return Scaffold(
+      body: Row(
+        children: [
+          const Text('Protected View'),
+          MaterialButton(
+            onPressed: () async {
+              await context.read<ProtectedModel>().logout();
+            },
+            child: const Text('LOGOUT'),
+          ),
+        ],
+      ),
+    );
   }
 }
