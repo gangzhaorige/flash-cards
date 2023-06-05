@@ -127,7 +127,7 @@ class _LoginFormState extends State<LoginForm> {
                           ),
                         ),
                       ),
-                      labelText: 'Username',
+                      labelText: 'Password',
                     ),
                     style: const TextStyle(fontSize: 18),
                   );
