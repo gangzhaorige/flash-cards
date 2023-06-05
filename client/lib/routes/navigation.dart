@@ -15,7 +15,7 @@ abstract class Routes {
 final appPages = [
   GetPage(
     name: Routes.home,
-    page: () => HomeView(),
+    page: () => const HomeView(),
   ),
   GetPage(
     name: Routes.protected,
@@ -24,10 +24,12 @@ final appPages = [
   ),
   GetPage(
     name: Routes.login,
-    page: () => LoginView(),
+    page: () => const LoginView(),
+    middlewares: [LoggedInGuard()]
   ),
   GetPage(
     name: Routes.register,
-    page: () => RegisterView(),
+    page: () => const RegisterView(),
+    middlewares: [LoggedInGuard()]
   )
 ];
