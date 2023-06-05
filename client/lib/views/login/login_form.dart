@@ -1,3 +1,5 @@
+import 'package:client/components/button.dart';
+import 'package:client/components/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -76,31 +78,10 @@ class _LoginFormState extends State<LoginForm> {
               Selector<LoginModel, Function>(
                 selector: (_, loginProvider) => loginProvider.updateUsernameText,
                 builder: (_, updateUsername, __) {
-                  return TextField(
-                    onChanged: (value) => updateUsername(value),
+                  return FlashTextField(
+                    onChanged: updateUsername,
                     controller: _usernameController,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    decoration: const InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      focusedBorder:OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            12,
-                          ),
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            12,
-                          ),
-                        ),
-                      ),
-                      labelText: 'Username',
-                    ),
-                    style: const TextStyle(fontSize: 18),
+                    text: 'Username',
                   );
                 }
               ),
@@ -110,61 +91,20 @@ class _LoginFormState extends State<LoginForm> {
               Selector<LoginModel, Function>(
                 selector: (_, loginProvider) => loginProvider.updatePasswordText,
                 builder: (_, updatePassword, __) {
-                  return TextField(
-                    onChanged: (value) => updatePassword(value),
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
+                  return FlashTextField(
+                    onChanged: updatePassword,
                     controller: _passwordController,
-                    decoration: const InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      focusedBorder:OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            12,
-                          ),
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            12,
-                          ),
-                        ),
-                      ),
-                      labelText: 'Password',
-                    ),
-                    style: const TextStyle(fontSize: 18),
+                    text: 'Password',
+                    obscureText: true,
                   );
                 }
               ),
               const SizedBox(
                 height: 25,
               ),
-              SizedBox(
-                height: 50,
-                width: 500,
-                child: OutlinedButton(
-                  onPressed: () async {
-                    await context.read<LoginModel>().login();
-                  },
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.black87,
-                    foregroundColor: Colors.white,
-                    side: const BorderSide(
-                      color: Colors.grey,
-                    ),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0))
-                  ),
-                  child : const Text(
-                    'Login',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20
-                    ),
-                  ),
-                ),
+              FlashButton(
+                onPressed: context.read<LoginModel>().login,
+                text: 'Login',
               ),
               const SizedBox(
                 height: 50,
