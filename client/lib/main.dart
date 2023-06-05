@@ -34,7 +34,7 @@ class FlashCards extends StatelessWidget {
       ),
       defaultTransition: Transition.noTransition, //this would be the solution
       transitionDuration: const Duration(seconds: 0),
-      initialRoute: Routes.home,
+      initialRoute: Routes.login,
       getPages: appPages,
     );
   }
