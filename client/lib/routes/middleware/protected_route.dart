@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../navigation.dart';
-import '../../services/auth.dart';
+import '../../services/authentication/auth.dart';
 
 class ProtectedGuard extends GetMiddleware {
   final authService = Get.find<AuthService>();

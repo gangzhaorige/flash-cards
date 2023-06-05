@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:client/services/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../services/auth.dart';
+import '../services/authentication/auth.dart';
 import '../services/dio_request.dart';
-import '../services/user.dart';
+import '../services/authentication/user.dart';
 
 class LoginModel extends ChangeNotifier {
 
@@ -33,8 +34,9 @@ class LoginModel extends ChangeNotifier {
       data: jsonEncode({'username' : _username, 'password' : _password}),
     );
     Map<dynamic, dynamic> data = response.data;
-    User user = User(username: data['username'] as String, email: data['email'] as String, id: data['id'] as int);
+    User user = User(data['username'] as String, data['email'] as String, data['id'] as int);
     final authService = Get.find<AuthService>();
+    LocalStorageService.setUser('user', json.encode(user.toJson()));
     await authService.setUser(user).then((value) {
       Get.toNamed('/protected');
     });
