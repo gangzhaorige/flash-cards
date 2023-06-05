@@ -18,8 +18,9 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     super.initState();
-    _usernameController = TextEditingController();
-    _passwordController = TextEditingController();
+    final myModel = Provider.of<LoginModel>(context, listen: false);
+    _usernameController = TextEditingController(text: myModel.username);
+    _passwordController = TextEditingController(text: myModel.password);
   }
 
   @override
