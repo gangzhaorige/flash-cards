@@ -6,14 +6,9 @@ class DioApi {
   static Dio dio() {
     BaseOptions options = BaseOptions(
       baseUrl: 'http://localhost:8080/api',
-      headers: {
-        'Content-type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-      },
     );
     var dio = Dio(options);
-    var adapter = BrowserHttpClientAdapter();
-    adapter.withCredentials = true;
+    var adapter = BrowserHttpClientAdapter()..withCredentials = true;
     dio.httpClientAdapter = adapter;
     return dio;
   }

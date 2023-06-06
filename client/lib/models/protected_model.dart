@@ -1,9 +1,41 @@
-import 'package:client/services/local_storage.dart';
+
+import 'package:client/services/authentication_service.dart';
+import 'package:client/services/shared_preferences_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-import '../services/authentication/auth.dart';
-import '../services/dio_request.dart';
+import '../dio_request.dart';
+import '../locator.dart';
+
+class UserInfo {
+  final int id;
+  final String username;
+  final String email;
+  final List<String> roles;
+
+  UserInfo(this.id, this.username, this.email, this.roles);
+
+  UserInfo.fromJson(Map<String, dynamic> json)
+    : username = json['username'],
+      email = json['email'],
+      id = json['id'] as int,
+      roles = json['roles'];
+  
+
+  Map<String, dynamic> toJson() {
+    return {
+      'username' : username,
+      'email' : email,
+      'id' : id,
+      'roles' : roles,
+    };
+  }
+  @override
+  String toString() {
+    return 'id: $id, username: $username, email: $email, roles: ${roles.toString()}';
+  }
+}
+
 
 class ProtectedModel extends ChangeNotifier {
   
@@ -12,9 +44,8 @@ class ProtectedModel extends ChangeNotifier {
       path: '/auth/signout',
     );
     if(response.statusCode == 200) {
-      LocalStorageService.removeUser('user');
-      final authService = Get.find<AuthService>();
-      authService.setUser(null);
+      locator<SharedPreferencesService>().removeUser('user');
+      locator<AuthenticaionService>().setUser(null);
       await Get.offAllNamed('/login');
     }
   }

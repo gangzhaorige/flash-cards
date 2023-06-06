@@ -1,26 +1,29 @@
 import 'dart:convert';
 
-import 'package:client/services/authentication/auth.dart';
-import 'package:client/services/local_storage.dart';
+import 'package:client/services/authentication_service.dart';
+import 'package:client/services/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
+import 'locator.dart';
 import 'models/login_model.dart';
 import 'models/protected_model.dart';
 import 'models/signup_model.dart';
 import 'routes/navigation.dart';
-import 'services/authentication/user.dart';
 
-void main() async {
-  await Get.putAsync(() => AuthService().init());
+GetIt locator = GetIt.instance;
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalStorageService.init();
-  String? userInfo = LocalStorageService.getUser('user');
+  await setupLocator();
+  final SharedPreferencesService sharedPreferencesService = locator<SharedPreferencesService>();
+  String? userInfo = sharedPreferencesService.getUser('user');
   if(userInfo != null) {
-    final authService = Get.find<AuthService>();
+    final authService = locator<AuthenticaionService>();
     await authService.setUser(User.fromJson(jsonDecode(userInfo)));
   }
+
   runApp(
     MultiProvider(
       providers: [

@@ -4,7 +4,7 @@ import 'package:client/routes/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../services/dio_request.dart';
+import '../dio_request.dart';
 
 class RegisterModel extends ChangeNotifier {
 
@@ -40,7 +40,6 @@ class RegisterModel extends ChangeNotifier {
       path: '/auth/signup',
       data: jsonEncode({'email' : _email,'username' : _username, 'password' : _password}),
     );
-    print(response.data);
     if(response.statusCode == 201) {
       Get.to(Routes.login);
     }
