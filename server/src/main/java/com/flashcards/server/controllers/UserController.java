@@ -22,12 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.flashcards.server.entity.Card;
+import com.flashcards.server.entity.Choice;
 import com.flashcards.server.entity.Role;
 import com.flashcards.server.entity.User;
 import com.flashcards.server.payload.requests.CardInfoRequest;
+import com.flashcards.server.payload.requests.MultipleChoiceCardInfoRequest;
 import com.flashcards.server.payload.responses.MessageResponse;
 import com.flashcards.server.payload.responses.UserInfoResponse;
 import com.flashcards.server.repositories.CardRepository;
+import com.flashcards.server.repositories.ChoiceRepository;
 import com.flashcards.server.repositories.UserRepository;
 
 @RestController
@@ -38,6 +41,8 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     CardRepository cardRepository;
+    @Autowired
+    ChoiceRepository choiceRepository;
 
     @GetMapping("")
     public ResponseEntity<?> getAllUsers() {
@@ -91,5 +96,28 @@ public class UserController {
         errors.add("User id does not exist.");
         json.put("errors", errors);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+    }
+
+    @PostMapping("/{id}/cards/choices")
+    public ResponseEntity<?> createMultipleChoicesCard(@PathVariable Long id, @Valid @RequestBody MultipleChoiceCardInfoRequest cardInfo) {
+        Optional<User> userResult = userRepository.findById(id);
+        if(!userResult.isPresent()) {
+            Map<String, Object> json = new HashMap<String, Object>();
+            json.put("message", "Validation errors in your request.");
+            List<String> errors = new ArrayList<>();
+            errors.add("User id does not exist.");
+            json.put("errors", errors);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+        }
+        Card card = new Card(cardInfo.getQuestion(), cardInfo.isIsMultipleChoice(), cardInfo.getAnswer());
+        card.setUser(userResult.get());
+        cardRepository.save(card);
+
+        for(String answer : cardInfo.getChoices()) {
+            Choice choice = new Choice(answer);
+            choice.setCard(card);
+            choiceRepository.save(choice);
+        }
+        return ResponseEntity.ok().body(new MessageResponse("Card created."));
     }
 }

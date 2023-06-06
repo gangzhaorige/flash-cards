@@ -26,6 +26,9 @@ public class Choice {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Card card;
 
+    protected Choice() {
+    }
+
     public Choice(String answerString) {
         this.answerText = answerString;
     }
