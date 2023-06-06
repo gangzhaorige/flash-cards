@@ -4,7 +4,6 @@ import 'package:client/services/authentication_service.dart';
 import 'package:client/services/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import 'locator.dart';
@@ -13,7 +12,6 @@ import 'models/protected_model.dart';
 import 'models/signup_model.dart';
 import 'routes/navigation.dart';
 
-GetIt locator = GetIt.instance;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
