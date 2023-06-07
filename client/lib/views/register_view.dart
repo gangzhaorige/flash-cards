@@ -40,7 +40,7 @@ class _RegisterViewState extends State<RegisterView> {
         child: Column(
           children: [
             const Text('Sign Up!'),
-            Selector<RegisterModel, Function>(
+            Selector<RegisterViewModel, Function>(
               selector: (_, registerProvider) => registerProvider.updateEmail,
               builder: (_, updateEmail, __) {
                 return TextField(
@@ -51,7 +51,7 @@ class _RegisterViewState extends State<RegisterView> {
                 );
               }
             ),
-            Selector<RegisterModel, Function>(
+            Selector<RegisterViewModel, Function>(
               selector: (_, registerProvider) => registerProvider.updateUsername,
               builder: (_, updateUsername, __) {
                 return TextField(
@@ -62,7 +62,7 @@ class _RegisterViewState extends State<RegisterView> {
                 );
               }
             ),
-            Selector<RegisterModel, Function>(
+            Selector<RegisterViewModel, Function>(
               selector: (_, registerProvider) => registerProvider.updatePassword,
               builder: (_, updatePassword, __) {
                 return TextField(
@@ -75,7 +75,7 @@ class _RegisterViewState extends State<RegisterView> {
             ),
             MaterialButton(
               onPressed:() async {
-                await context.read<RegisterModel>().signup();
+                await context.read<RegisterViewModel>().signup();
               },
               color: Colors.blue,
               child: const Text('REGISTER ACCOUNT'),

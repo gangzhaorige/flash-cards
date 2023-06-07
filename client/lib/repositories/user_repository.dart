@@ -6,7 +6,7 @@ import '../services/dio_request.dart';
 class UserRepository {
   Future<List<UserInfo>> fetchUsers() async {
     try {
-      Response<dynamic> response = await DioApi.postRequest(
+      Response<dynamic> response = await DioApi.getRequest(
         path: '/users',
       );
       Map<String, dynamic> data = response.data;

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../services/dio_request.dart';
 
-class RegisterModel extends ChangeNotifier {
+class RegisterViewModel extends ChangeNotifier {
 
   String _username = '';
 

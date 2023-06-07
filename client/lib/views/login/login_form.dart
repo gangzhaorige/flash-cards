@@ -20,7 +20,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     super.initState();
-    final LoginModel loginModel = Provider.of<LoginModel>(context, listen: false);
+    final LoginViewModel loginModel = Provider.of<LoginViewModel>(context, listen: false);
     _usernameController = TextEditingController(text: loginModel.username);
     _passwordController = TextEditingController(text: loginModel.password);
   }
@@ -75,7 +75,7 @@ class _LoginFormState extends State<LoginForm> {
               const SizedBox(
                 height: 50,
               ),
-              Selector<LoginModel, Function>(
+              Selector<LoginViewModel, Function>(
                 selector: (_, loginProvider) => loginProvider.updateUsernameText,
                 builder: (_, updateUsername, __) {
                   return FlashTextField(
@@ -88,7 +88,7 @@ class _LoginFormState extends State<LoginForm> {
               const SizedBox(
                 height: 25,
               ),
-              Selector<LoginModel, Function>(
+              Selector<LoginViewModel, Function>(
                 selector: (_, loginProvider) => loginProvider.updatePasswordText,
                 builder: (_, updatePassword, __) {
                   return FlashTextField(
@@ -103,7 +103,7 @@ class _LoginFormState extends State<LoginForm> {
                 height: 25,
               ),
               FlashButton(
-                onPressed: context.read<LoginModel>().login,
+                onPressed: context.read<LoginViewModel>().login,
                 text: 'Login',
               ),
               const SizedBox(
@@ -126,7 +126,7 @@ class _LoginFormState extends State<LoginForm> {
                       foregroundColor: MaterialStateProperty.all(Colors.blue),
                     ),
                     onPressed: () async {
-                      await context.read<LoginModel>().goToSignup();
+                      await context.read<LoginViewModel>().goToSignup();
                     },
                     child: const Text(
                       'Sign Up',

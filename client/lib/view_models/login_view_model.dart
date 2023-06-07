@@ -9,7 +9,7 @@ import '../locator.dart';
 import '../models/user.dart';
 import '../services/authentication_service.dart';
 
-class LoginModel extends ChangeNotifier {
+class LoginViewModel extends ChangeNotifier {
 
   String _username = '';
 

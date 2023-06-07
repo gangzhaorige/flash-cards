@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'locator.dart';
 import 'models/user.dart';
 import 'view_models/login_view_model.dart';
+import 'view_models/protected_view_model.dart';
 import 'view_models/signup_view_model.dart';
 import 'routes/navigation.dart';
 
@@ -23,9 +24,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LoginModel()),
-        ChangeNotifierProvider(create: (_) => RegisterModel()),
-        ChangeNotifierProvider(create: (_) => ProtectedModel(locator<UserRepository>())),
+        ChangeNotifierProvider(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider(create: (_) => RegisterViewModel()),
+        ChangeNotifierProvider(create: (_) => ProtectedViewModel(locator<UserRepository>())),
       ],
       child: const FlashCards(),
     ),
