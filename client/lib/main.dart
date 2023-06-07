@@ -1,24 +1,22 @@
 import 'dart:convert';
-
-import 'package:client/services/authentication/auth.dart';
-import 'package:client/services/local_storage.dart';
+import 'package:client/services/authentication_service.dart';
+import 'package:client/services/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'models/login_model.dart';
-import 'models/protected_model.dart';
-import 'models/signup_model.dart';
+import 'locator.dart';
+import 'models/user.dart';
+import 'view_models/login_model.dart';
+import 'view_models/signup_model.dart';
 import 'routes/navigation.dart';
-import 'services/authentication/user.dart';
 
 void main() async {
-  await Get.putAsync(() => AuthService().init());
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalStorageService.init();
-  String? userInfo = LocalStorageService.getUser('user');
+  await setupLocator();
+  String? userInfo = locator<SharedPreferencesService>().getUser('user');
   if(userInfo != null) {
-    final authService = Get.find<AuthService>();
+    final authService = locator<AuthenticaionService>();
     await authService.setUser(User.fromJson(jsonDecode(userInfo)));
   }
   runApp(
@@ -26,7 +24,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => LoginModel()),
         ChangeNotifierProvider(create: (_) => RegisterModel()),
-        ChangeNotifierProvider(create: (_) => ProtectedModel()),
+        // ChangeNotifierProvider(create: (_) => ProtectedModel(locator<UserRepository>())),
       ],
       child: const FlashCards(),
     ),

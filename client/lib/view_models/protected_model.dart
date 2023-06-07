@@ -1,9 +1,10 @@
-import 'package:client/services/local_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-import '../services/authentication/auth.dart';
+import '../locator.dart';
+import '../services/authentication_service.dart';
 import '../services/dio_request.dart';
+import '../services/shared_preferences_service.dart';
 
 class ProtectedModel extends ChangeNotifier {
   
@@ -12,9 +13,8 @@ class ProtectedModel extends ChangeNotifier {
       path: '/auth/signout',
     );
     if(response.statusCode == 200) {
-      LocalStorageService.removeUser('user');
-      final authService = Get.find<AuthService>();
-      authService.setUser(null);
+      locator<SharedPreferencesService>().removeUser();
+      locator<AuthenticaionService>().setUser(null);
       await Get.offAllNamed('/login');
     }
   }

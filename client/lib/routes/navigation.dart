@@ -3,6 +3,7 @@ import 'package:client/routes/middleware/protected_route.dart';
 import 'package:client/views/login/login_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
+import '../views/protected_view.dart';
 import '../views/register_view.dart';
 
 abstract class Routes {
