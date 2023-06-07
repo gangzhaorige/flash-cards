@@ -12,7 +12,9 @@ class UserRepository {
       Map<String, dynamic> data = response.data;
       List<UserInfo> result = [];
       if(response.statusCode == 200) {
-       
+        for(Map<String, dynamic> user in data['users']) {
+          result.add(UserInfo.fromJson(user));
+        }
       }
       return result;
     } on DioError catch (e) {
