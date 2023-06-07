@@ -18,16 +18,16 @@ class SharedPreferencesService {
     }
   }
 
-  Future<bool> setUser(String key, String user) {
-    return _prefs.setString(key, user);
+  Future<bool> setUser(String user) {
+    return _prefs.setString('user', user);
   }
 
   String? getUser(String key) {
     return _prefs.getString(key);
   }
 
-  Future<bool> removeUser(String key) {
-    return _prefs.remove(key);
+  Future<bool> removeUser() {
+    return _prefs.remove('user');
   }
 
 }

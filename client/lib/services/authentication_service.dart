@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+
+import '../dio_request.dart';
+import '../models/user.dart';
+
 class AuthenticaionService {
 
   static AuthenticaionService getInstance() => AuthenticaionService._();
@@ -9,25 +16,27 @@ class AuthenticaionService {
   Future<void> setUser(User? user) async {
     this.user = user;
   }
-}
 
-class User {
-  final String username;
-  final String email;
-  final int id;
-  
-  User(this.username,this.email,this.id);
+  Future<Response> login(String username, String password) async {
+    try {
+      var response = await DioApi.postRequest(
+        path: '/auth/signin',
+        data: jsonEncode({'username' : username, 'password' : password}),
+      );
+      return response;
+    } on DioError catch (e) {
+      return e.response!.data;
+    }
+  }
 
-  User.fromJson(Map<String, dynamic> json) 
-    : username = json['username'],
-      email = json['email'],
-      id = json['id'] as int;
-  
-  Map<String, dynamic> toJson() {
-    return {
-      'username' : username,
-      'email' : email,
-      'id' : id
-    };
+  Future<void> logout() async {
+    try {
+      await DioApi.postRequest(
+        path: '/auth/signout',
+      );
+    } on DioError catch (e) {
+      return e.response!.data;
+    }
   }
 }
+
