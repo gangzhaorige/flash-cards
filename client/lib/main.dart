@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:client/repositories/user_repository.dart';
 import 'package:client/services/authentication_service.dart';
 import 'package:client/services/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,8 @@ import 'package:provider/provider.dart';
 
 import 'locator.dart';
 import 'models/user.dart';
-import 'view_models/login_model.dart';
-import 'view_models/signup_model.dart';
+import 'view_models/login_view_model.dart';
+import 'view_models/signup_view_model.dart';
 import 'routes/navigation.dart';
 
 void main() async {
@@ -24,7 +25,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => LoginModel()),
         ChangeNotifierProvider(create: (_) => RegisterModel()),
-        // ChangeNotifierProvider(create: (_) => ProtectedModel(locator<UserRepository>())),
+        ChangeNotifierProvider(create: (_) => ProtectedModel(locator<UserRepository>())),
       ],
       child: const FlashCards(),
     ),

@@ -3,7 +3,7 @@ import 'package:client/components/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../view_models/login_model.dart';
+import '../../view_models/login_view_model.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});

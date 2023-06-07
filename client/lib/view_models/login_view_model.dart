@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:client/services/shared_preferences_service.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
 
 import '../locator.dart';
 import '../models/user.dart';
 import '../services/authentication_service.dart';
-import '../services/dio_request.dart';
 
 class LoginModel extends ChangeNotifier {
 
@@ -30,11 +30,8 @@ class LoginModel extends ChangeNotifier {
   }
 
   Future<void> login() async {
-    var response = await DioApi.postRequest(
-      path: '/auth/signin',
-      data: jsonEncode({'username' : _username, 'password' : _password}),
-    );
-    Map<dynamic, dynamic> data = response.data;
+    Response response = await locator<AuthenticaionService>().login(_username, _password);
+    var data = response.data;
     User user = User(data['username'] as String, data['email'] as String, data['id'] as int);
     await locator<SharedPreferencesService>().setUser(json.encode(user.toJson()));
     await locator<AuthenticaionService>().setUser(user).then((value) {

@@ -1,3 +1,4 @@
+import 'package:client/repositories/user_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +8,10 @@ import '../services/dio_request.dart';
 import '../services/shared_preferences_service.dart';
 
 class ProtectedModel extends ChangeNotifier {
+  
+  final UserRepository _userRepository;
+
+  ProtectedModel(this._userRepository);
   
   Future<void> logout() async {
     var response = await DioApi.postRequest(
