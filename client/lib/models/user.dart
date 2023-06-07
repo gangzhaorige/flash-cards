@@ -5,12 +5,11 @@ class User {
   
   User(this.username,this.email,this.id);
 
-  User.fromJson(Map<String, dynamic> json)
+  User.fromJson(Map<String, dynamic> json) 
     : username = json['username'],
       email = json['email'],
       id = json['id'] as int;
   
-
   Map<String, dynamic> toJson() {
     return {
       'username' : username,

@@ -9,7 +9,6 @@ public class CardInfoRequest {
     @NotBlank
     private String answer;
 
-    @NotBlank
     private boolean isMultipleChoice;
 
 

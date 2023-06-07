@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
+import '../dio_request.dart';
 import '../models/user.dart';
-import 'dio_request.dart';
 
 class AuthenticaionService {
 

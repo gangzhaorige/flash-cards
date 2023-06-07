@@ -1,7 +1,7 @@
 import 'package:client/models/user_info.dart';
 import 'package:dio/dio.dart';
 
-import '../services/dio_request.dart';
+import '../dio_request.dart';
 
 class UserRepository {
   Future<List<UserInfo>> fetchUsers() async {

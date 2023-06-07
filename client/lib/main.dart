@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:client/repositories/user_repository.dart';
-import 'package:client/services/authentication_service.dart';
 import 'package:client/services/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'locator.dart';
 import 'models/user.dart';
+import 'services/authentication_service.dart';
 import 'view_models/login_view_model.dart';
 import 'view_models/protected_view_model.dart';
 import 'view_models/signup_view_model.dart';
@@ -21,6 +21,7 @@ void main() async {
     final authService = locator<AuthenticaionService>();
     await authService.setUser(User.fromJson(jsonDecode(userInfo)));
   }
+
   runApp(
     MultiProvider(
       providers: [

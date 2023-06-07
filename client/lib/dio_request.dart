@@ -8,8 +8,7 @@ class DioApi {
       baseUrl: 'http://localhost:8080/api',
     );
     var dio = Dio(options);
-    var adapter = BrowserHttpClientAdapter();
-    adapter.withCredentials = true;
+    var adapter = BrowserHttpClientAdapter()..withCredentials = true;
     dio.httpClientAdapter = adapter;
     return dio;
   }

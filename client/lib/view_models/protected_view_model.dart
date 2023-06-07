@@ -3,9 +3,9 @@ import 'package:client/repositories/user_repository.dart';
 import 'package:client/view_models/loading_view_model.dart';
 import 'package:get/get.dart';
 
+import '../dio_request.dart';
 import '../locator.dart';
 import '../services/authentication_service.dart';
-import '../services/dio_request.dart';
 import '../services/shared_preferences_service.dart';
 
 class ProtectedViewModel extends LoadingViewModel {
