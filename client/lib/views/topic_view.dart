@@ -58,6 +58,7 @@ class _TopicViewState extends State<TopicView> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.read<TopicViewModel>().addTopicForUser(1, '2', false);
+          context.read<TopicViewModel>().showBasicDialog();
         },
         child: const Icon(
           Icons.plus_one,

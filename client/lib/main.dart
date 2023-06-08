@@ -6,6 +6,7 @@ import 'package:client/view_models/topic_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked_services/stacked_services.dart' hide Transition;
 
 import 'locator.dart';
 import 'models/user.dart';
@@ -53,6 +54,7 @@ class FlashCards extends StatelessWidget {
       transitionDuration: const Duration(seconds: 0),
       initialRoute: Routes.login,
       getPages: appPages,
+      navigatorKey: StackedService.navigatorKey,
     );
   }
 }
