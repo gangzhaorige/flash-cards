@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart' hide Transition;
 
+import 'custom_dialog_ui.dart';
 import 'locator.dart';
 import 'models/user.dart';
 import 'services/authentication_service.dart';
@@ -19,6 +20,7 @@ import 'routes/navigation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
+  setupDialogUi();
   String? userInfo = locator<SharedPreferencesService>().getUser('user');
   if(userInfo != null) {
     final authService = locator<AuthenticaionService>();
