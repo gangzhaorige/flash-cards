@@ -19,13 +19,11 @@ class TopicViewModel extends LoadingViewModel {
     try {
       isLoading = true;
       // simulating delay from server
-      Future.delayed(const Duration(seconds: 3)).then((value) async {
-        await _topicRepository.fetchTopicsForUser(userId).then((value) {
-          list = value;
-          isLoading = false;
-        });
-        notifyListeners();
+      await _topicRepository.fetchTopicsForUser(userId).then((value) {
+        list = value;
+        isLoading = false;
       });
+      notifyListeners();
     } on Exception catch (e) {
       print(e.toString());
       rethrow;
@@ -37,8 +35,7 @@ class TopicViewModel extends LoadingViewModel {
       await _topicRepository.createTopicForUser(userId, subject, isPublic ).then((value) {
         list.add(value!);
       }).then((value) => notifyListeners());
-    } on Exception catch (e) {
-      print(e.toString());
+    } on Exception catch (_) {
       rethrow;
     }
   }

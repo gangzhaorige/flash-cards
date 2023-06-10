@@ -11,7 +11,6 @@ void setupDialogUi() {
       _BasicDialog(request: sheetRequest, completer: completer),
   };
   dialogService.registerCustomDialogBuilders(builders);
-  print('nani');
 }
 
 enum DialogType {

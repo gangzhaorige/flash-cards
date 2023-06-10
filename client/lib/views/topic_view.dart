@@ -47,9 +47,25 @@ class _TopicViewState extends State<TopicView> {
             itemBuilder:(context, index) {
               Topic topic = viewModel.list[index];
               return Container(
-                alignment: Alignment.center,
                 color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
-                child: Text('${topic.subject}')
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          viewModel.list[index].isPublic ?
+                          Icons.public : Icons.private_connectivity,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(child: Text('${viewModel.list[index].subject}')),
+                    ),
+                  ],
+                ),
               );
             }
           );

@@ -20,14 +20,11 @@ class ProtectedViewModel extends LoadingViewModel {
     try {
       isLoading = true;
       // simulating delay from server
-      Future.delayed(const Duration(seconds: 3)).then((value) async {
-        await _userRepository.fetchUsers().then((value) {
-          list = value;
-          isLoading = false;
-        });
+      await _userRepository.fetchUsers().then((value) {
+        list = value;
+        isLoading = false;
       });
-    } on Exception catch (e) {
-      print(e.toString());
+    } on Exception catch (_) {
       rethrow;
     }
     notifyListeners();

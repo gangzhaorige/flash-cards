@@ -29,14 +29,19 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> login() async {
+  Future<bool> login(Function setIsLoggedIn) async {
     Response response = await locator<AuthenticaionService>().login(_username, _password);
     var data = response.data;
-    User user = User(data['username'] as String, data['email'] as String, data['id'] as int);
-    await locator<SharedPreferencesService>().setUser(json.encode(user.toJson()));
-    await locator<AuthenticaionService>().setUser(user).then((value) {
-      Get.toNamed('/protected');
-    });
+    if(response.statusCode == 200) {
+      setIsLoggedIn(true);
+      User user = User(data['username'] as String, data['email'] as String, data['id'] as int);
+      await locator<SharedPreferencesService>().setUser(json.encode(user.toJson()));
+      await locator<AuthenticaionService>().setUser(user).then((value) {
+        Get.toNamed('/protected');
+      });
+      return true;
+    }
+    return false;
   }
 
   Future<void> goToSignup() async {

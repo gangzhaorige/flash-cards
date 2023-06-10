@@ -25,7 +25,6 @@ class _ProtectedViewState extends State<ProtectedView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Protected View')),
       body: Consumer<ProtectedViewModel>(
         builder: (context, viewModel, child) {
           if(viewModel.isLoading) {

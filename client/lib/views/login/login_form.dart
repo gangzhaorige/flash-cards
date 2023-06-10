@@ -1,5 +1,6 @@
 import 'package:client/components/button.dart';
 import 'package:client/components/text_field.dart';
+import 'package:client/view_models/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -103,7 +104,9 @@ class _LoginFormState extends State<LoginForm> {
                 height: 25,
               ),
               FlashButton(
-                onPressed: context.read<LoginViewModel>().login,
+                onPressed: () {
+                  context.read<LoginViewModel>().login(context.read<AuthViewModel>().setIsLoggedIn);  
+                },
                 text: 'Login',
               ),
               const SizedBox(
