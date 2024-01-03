@@ -32,17 +32,28 @@ class SettingsWrapper extends StatelessWidget {
       key: Get.nestedKey(SettingsNavigation.id),
       // initialRoute: Routes.protected,
       onGenerateRoute: (settings) {
-        if (settings.name == '/protected') {
-          return GetPageRoute(
-            routeName: Routes.protected,
-            page: () => ProtectedView(),
-          );
-        } else {
-          return GetPageRoute(
-            routeName: Routes.topic,
-            page: () => TopicView()
-          );
+        GetPageRoute page;
+        switch(settings.name) {
+          case Routes.protected:
+            page = GetPageRoute(
+              routeName: Routes.protected,
+              page: () => ProtectedView(),
+            );
+            break;
+          case Routes.topic: 
+            page = GetPageRoute(
+              routeName: Routes.topic,
+              page: () => TopicView(),
+            );
+            break;
+          default: 
+            page = GetPageRoute(
+              routeName: Routes.home,
+              page: () => HomeView(),
+            );
+            break;
         }
+        return page;
       },
     );
   }

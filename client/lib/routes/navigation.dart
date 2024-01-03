@@ -24,19 +24,21 @@ final rootPages = [
   GetPage(
     name: Routes.login,
     page: () => const LoginView(),
-    middlewares: []
+    middlewares: [LoggedInGuard()]
   ),
   GetPage(
     name: Routes.register,
     page: () => const RegisterView(),
-    middlewares: []
+    middlewares: [LoggedInGuard()]
   ),
   GetPage(
     name: Routes.protected,
     page: () => const ProtectedView(),
+    middlewares: [ProtectedGuard()],
   ),
   GetPage(
     name: Routes.topic,
     page: () => const TopicView(),
+    middlewares: [ProtectedGuard()],
   ),
 ];

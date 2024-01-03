@@ -4,7 +4,6 @@ import 'package:client/repositories/user_repository.dart';
 import 'package:client/services/shared_preferences_service.dart';
 import 'package:client/view_models/auth_view_model.dart';
 import 'package:client/view_models/topic_view_model.dart';
-import 'package:client/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -103,7 +102,6 @@ class BaseWidget extends StatelessWidget {
           ) : null,
           body: child,
         );
-      
       }
     );
   }
